@@ -29,7 +29,7 @@ class mydb_mgr:
             pool_size=3,
             pool_reset_session=True,
             host=os.getenv("RDS_HOST"),
-            port=3306,
+            port=os.getenv("RDS_PORT"),
             user=os.getenv("RDS_USER"),
             password=os.getenv("RDS_ROOT_PASSWD"),
             use_pure=True
