@@ -39,10 +39,10 @@ def add_message():
 
 		new_filename = uuid.uuid4().hex + '.' + \
 			original_filename.rsplit('.', 1)[1].lower()
-		s3.Bucket(bucket_name).upload_fileobj(original_filename, new_filename)
-
 		print(original_filename)
 		print(new_filename)
+		s3.Bucket(bucket_name).upload_fileobj(request.files["image"], new_filename)
+
 		mydb.add_message(request.args.get("content"), original_filename)
 		return \
 			jsonify({ \
