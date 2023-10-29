@@ -45,9 +45,9 @@ def add_message():
 			original_filename.rsplit('.', 1)[1].lower()
 		print(original_filename)
 		print(new_filename)
-		s3.Bucket(bucket_name).upload_fileobj(request.form.get("message"), new_filename)
+		s3.Bucket(bucket_name).upload_fileobj(request.files["image"], new_filename)
 
-		mydb.add_message(request.args.get("content"), original_filename)
+		mydb.add_message(request.form.get("message"), original_filename)
 		return \
 			jsonify({ \
 				"ok": True
