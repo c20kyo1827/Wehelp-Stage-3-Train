@@ -48,7 +48,7 @@ def add_message():
 		print(new_filename)
 		s3.Bucket(bucket_name).upload_fileobj(request.files["image"], new_filename)
 
-		mydb.add_message(request.form.get("message"), image_uuid)
+		mydb.add_message(request.form.get("message"), new_filename)
 		return \
 			jsonify({ \
 				"ok": True
