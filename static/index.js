@@ -16,6 +16,9 @@ indexNamespace.addElementListener = function addElementListener(){
         const msg = document.getElementById("id-message").value;
         const img = document.getElementById("id-image").value;
         let url = "/api/addMessage?image=" + img + "&content=" + msg;
+        console.log(img);
+        console.log(msg);
+        console.log(url);
         let response = await fetch(url);
         let json = await response.json();
         if("ok" in json){

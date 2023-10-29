@@ -20,6 +20,8 @@ s3 = boto3.client(
 def add_message():
 	try:
 		if request.args.get("image") and request.args.get("content"):
+			print(request.args.get("image"))
+			print(request.args.get("content"))
 			mydb.add_message(request.args.get("message"), request.args.get("image"))
 			return \
 				jsonify({ \
