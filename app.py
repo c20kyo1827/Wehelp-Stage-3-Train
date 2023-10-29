@@ -38,7 +38,7 @@ def add_message():
 					}), 400
 
 			new_filename = uuid.uuid4().hex + '.' + \
-				request.args.get("image").filename.rsplit('.', 1)[1].lower()
+				request.args.get("image").rsplit('.', 1)[1].lower()
 			s3.Bucket(bucket_name).upload_fileobj(request.args.get("image"), new_filename)
 
 			mydb.add_message(request.args.get("content"), request.args.get("image"))
