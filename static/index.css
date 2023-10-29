@@ -2,3 +2,10 @@ header{
     font-size: 18px;
     font-weight:bold;
 }
+
+.images{
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    object-position: center;
+}

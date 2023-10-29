@@ -71,8 +71,11 @@ def get_message():
 		for obj in bucket.objects.all():
 			files.append(obj.key)
 		print(files)
-		return jsonify({ \
-				"data": result \
+		return jsonify({
+				"data": {
+					"message": result,
+					"image": files
+				}
 			})
 	except Exception as e:
 		exc_type, _, exc_tb = sys.exc_info()

@@ -6,8 +6,22 @@ window.onload = async function loading(){
     indexNamespace.addElementListener();
 }
 
-indexNamespace.initialization = function initialization(){
-
+indexNamespace.initialization = async function initialization(){
+    const board = document.getElementById("id-board");
+    let response = await fetch("api/getMessage");
+    let json = await response.json();
+    console.log(json);
+    // for(let data of json.data){
+    //     const content = document.createElement("div");
+    //     content.innerText = data[1];
+    //     const image = document.createElement("img");
+    //     image.classList.add("images");
+    //     image.src = data[2];
+    //     const hr = document.createElement("hr");
+    //     board.appendChild(content);
+    //     board.appendChild(image);
+    //     board.appendChild(hr);
+    // }
 }
 
 indexNamespace.addElementListener = function addElementListener(){
