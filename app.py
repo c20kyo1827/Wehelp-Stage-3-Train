@@ -29,7 +29,8 @@ def add_message():
 		def allowed_file(filename):
 			return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-		if not allowed_file(request.files["image"].filename):
+		original_filename = request.files["image"].filename
+		if not allowed_file(original_filename):
 			return \
 				jsonify({ \
 					"error": True, \
@@ -37,10 +38,12 @@ def add_message():
 				}), 400
 
 		new_filename = uuid.uuid4().hex + '.' + \
-			request.files["image"].rsplit('.', 1)[1].lower()
-		s3.Bucket(bucket_name).upload_fileobj(request.files["image"], new_filename)
+			original_filename.rsplit('.', 1)[1].lower()
+		s3.Bucket(bucket_name).upload_fileobj(original_filename, new_filename)
 
-		mydb.add_message(request.args.get("content"), request.files["image"])
+		print(original_filename)
+		print(new_filename)
+		mydb.add_message(request.args.get("content"), original_filename)
 		return \
 			jsonify({ \
 				"ok": True
