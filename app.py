@@ -22,7 +22,7 @@ logging.basicConfig(level=logging.INFO,
                 format="[%(levelname)-7s] %(name)s - %(message)s",
                 stream=sys.stdout)
 
-@app.route("/api/addMessage", endpoint="/api/addMessage" ,method=["POST"])
+@app.route("/api/addMessage", endpoint="/api/addMessage" ,methods=["POST"])
 def add_message():
 	try:
 		print(request.json.get("image"))
