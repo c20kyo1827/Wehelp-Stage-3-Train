@@ -41,13 +41,14 @@ def add_message():
 					"message": "Image format is not allowed" \
 				}), 400
 
-		new_filename = uuid.uuid4().hex + '.' + \
+		image_uuid = uuid.uuid4().hex
+		new_filename = image_uuid + '.' + \
 			original_filename.rsplit('.', 1)[1].lower()
 		print(original_filename)
 		print(new_filename)
 		s3.Bucket(bucket_name).upload_fileobj(request.files["image"], new_filename)
 
-		mydb.add_message(request.form.get("message"), original_filename)
+		mydb.add_message(request.form.get("message"), image_uuid)
 		return \
 			jsonify({ \
 				"ok": True

@@ -11,17 +11,20 @@ indexNamespace.initialization = async function initialization(){
     let response = await fetch("api/getMessage");
     let json = await response.json();
     console.log(json);
-    // for(let data of json.data){
-    //     const content = document.createElement("div");
-    //     content.innerText = data[1];
-    //     const image = document.createElement("img");
-    //     image.classList.add("images");
-    //     image.src = data[2];
-    //     const hr = document.createElement("hr");
-    //     board.appendChild(content);
-    //     board.appendChild(image);
-    //     board.appendChild(hr);
-    // }
+    const cloudFront = "https://d188mmb7xma67m.cloudfront.net/";
+    for(const[data, file] of zipArrays(json.data.message, json.data.image)){
+        console.log(data);
+        console.log(file);
+        // const content = document.createElement("div");
+        // content.innerText = data[1];
+        // const image = document.createElement("img");
+        // image.classList.add("images");
+        // image.src = data[2];
+        // const hr = document.createElement("hr");
+        // board.appendChild(content);
+        // board.appendChild(image);
+        // board.appendChild(hr);
+    }
 }
 
 indexNamespace.addElementListener = function addElementListener(){
