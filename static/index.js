@@ -16,6 +16,7 @@ indexNamespace.initialization = async function initialization(){
     for (let i = 0; i < length; i++) {
         zipArrays.push([json.data.message[i], json.data.image[i]]);
     }
+    console.log(zipArrays);
     const cloudFront = "https://d188mmb7xma67m.cloudfront.net/";
     for(const[data, file] of zipArrays){
         console.log(data);
