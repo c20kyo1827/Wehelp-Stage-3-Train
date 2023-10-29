@@ -29,7 +29,7 @@ def add_message():
 		def allowed_file(filename):
 			return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-		if not allowed_file(request.files["image"]):
+		if not allowed_file(request.files["image"].filename):
 			return \
 				jsonify({ \
 					"error": True, \
