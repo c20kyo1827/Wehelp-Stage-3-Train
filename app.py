@@ -22,30 +22,31 @@ logging.basicConfig(level=logging.INFO,
                 format="[%(levelname)-7s] %(name)s - %(message)s",
                 stream=sys.stdout)
 
-@app.route("/api/addMessage", endpoint="/api/addMessage")
+@app.route("/api/addMessage", endpoint="/api/addMessage" ,method=["POST"])
 def add_message():
 	try:
-		if request.args.get("image") and request.args.get("content"):
-			ALLOWED_EXTENSIONS = {'png', 'jpg', 'bmp', 'tiff', 'tif', 'gif', 'jpeg'}
-			def allowed_file(filename):
-				return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-	
-			if not allowed_file(request.args.get("image")):
-				return \
-					jsonify({ \
-						"error": True, \
-						"message": "Image format is not allowed" \
-					}), 400
+		print(request.json.get("image"))
+		print(request.json.get("content"))
+		# ALLOWED_EXTENSIONS = {'png', 'jpg', 'bmp', 'tiff', 'tif', 'gif', 'jpeg'}
+		# def allowed_file(filename):
+		# 	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-			new_filename = uuid.uuid4().hex + '.' + \
-				request.args.get("image").rsplit('.', 1)[1].lower()
-			s3.Bucket(bucket_name).upload_fileobj(request.args.get("image"), new_filename)
+		# if not allowed_file(request.args.get("image")):
+		# 	return \
+		# 		jsonify({ \
+		# 			"error": True, \
+		# 			"message": "Image format is not allowed" \
+		# 		}), 400
 
-			mydb.add_message(request.args.get("content"), request.args.get("image"))
-			return \
-				jsonify({ \
-					"ok": True
-				}), 200
+		# new_filename = uuid.uuid4().hex + '.' + \
+		# 	request.args.get("image").rsplit('.', 1)[1].lower()
+		# s3.Bucket(bucket_name).upload_fileobj(request.args.get("image"), new_filename)
+
+		# mydb.add_message(request.args.get("content"), request.args.get("image"))
+		return \
+			jsonify({ \
+				"ok": True
+			}), 200
 	except Exception as e:
 		exc_type, _, exc_tb = sys.exc_info()
 		logging.error("Error : {error}, type : {type} at line : {line}".format(error=e, type=exc_type, line=exc_tb.tb_lineno))
