@@ -11,7 +11,7 @@ indexNamespace.initialization = function initialization(){
 }
 
 indexNamespace.addElementListener = function addElementListener(){
-    const form = document.getElementById("id-format");
+    const form = document.getElementById("id-form");
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
         const msg = document.getElementById("id-message");
@@ -21,8 +21,10 @@ indexNamespace.addElementListener = function addElementListener(){
             return;
         }
         let url = "/api/addMessage";
-        const formData = new FormData(form);
-        console.log(formData);
+        let formData = new FormData(form);
+        for (var pair of formData.entries()) {
+            console.log(pair[0]+ ', ' + pair[1]); 
+        }
         let response = await fetch(url,
                 {
                     method: "POST",
