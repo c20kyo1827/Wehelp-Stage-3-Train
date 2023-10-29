@@ -20,10 +20,7 @@ indexNamespace.addElementListener = function addElementListener(){
             return;
         }
         let url = "/api/addMessage";
-        const formData = new FormData();
-        formData.append("image", img);
-        formData.append("content", msg);
-        console.log(formData);
+        const formData = new FormData(document.getElementById("id-form"));
         console.log(formData);
         let response = await fetch(url,
                 {

@@ -12,15 +12,17 @@
     </header>
     <main>
         <div class="message-form">
-            <div>
-                <label for="message">文字內容</label>
-                <input type="text" id="id-message" name="message">
-            </div>
-            <div>
-                <label for="image">圖片檔案</label>
-                <input type="file" id="id-image" name="image">
-            </div>
-            <button id="id-button">送出</button>
+            <form method="POST" id="id-format">
+                <div>
+                    <label for="message">文字內容</label>
+                    <input type="text" id="id-message" name="message">
+                </div>
+                <div>
+                    <label for="image">圖片檔案</label>
+                    <input type="file" id="id-image" name="image">
+                </div>
+                <button id="id-button">送出</button>
+            </form>
         </div>
         <hr>
         <div id="id-board">
