@@ -21,15 +21,15 @@ indexNamespace.initialization = async function initialization(){
     for(const[data, file] of zipArrays){
         console.log(data);
         console.log(file);
-        // const content = document.createElement("div");
-        // content.innerText = data[1];
-        // const image = document.createElement("img");
-        // image.classList.add("images");
-        // image.src = data[2];
-        // const hr = document.createElement("hr");
-        // board.appendChild(content);
-        // board.appendChild(image);
-        // board.appendChild(hr);
+        const content = document.createElement("div");
+        content.innerText = data[1];
+        const image = document.createElement("img");
+        image.classList.add("images");
+        image.src = cloudFront + file;
+        const hr = document.createElement("hr");
+        board.appendChild(content);
+        board.appendChild(image);
+        board.appendChild(hr);
     }
 }
 
