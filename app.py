@@ -36,6 +36,7 @@ def add_message():
 def get_message():
 	try:
 		result = mydb.get_all_message()
+		print(result)
 		return jsonify({ \
 				"data": result \
 			})

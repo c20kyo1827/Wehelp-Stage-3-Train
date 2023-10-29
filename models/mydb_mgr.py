@@ -31,8 +31,7 @@ class mydb_mgr:
             host=os.getenv("RDS_HOST"),
             port=os.getenv("RDS_PORT"),
             user=os.getenv("RDS_USER"),
-            password=os.getenv("RDS_ROOT_PASSWD"),
-            use_pure=True
+            password=os.getenv("RDS_ROOT_PASSWD")
         )
         logging.info("Connection Pool Name - {}".format(self._mypool.pool_name))
         logging.info("Connection Pool Size - {}".format(self._mypool.pool_size))
@@ -90,6 +89,17 @@ class mydb_mgr:
             logging.info(str(cursor.fetchall()))
         self.connect_and_run(run, True)
 
+    def show(self):
+        def run(cursor):
+            cursor.execute("USE mydb")
+            table = ["message"]
+            for t in table:
+                cmd = "SELECT * FROM " + t
+                cursor.execute(cmd)
+                member_info = cursor.fetchall()
+                for x in member_info: logging.info(x)
+        self.connect_and_run(run)
+
     def add_message(self, content, img_url):
         def add_attraction(cursor):
             sql = "INSERT INTO message  \
@@ -126,6 +136,9 @@ if __name__=="__main__":
         flow.reset()
     else:
         flow.init()
+
+    if arg.show:
+        flow.show()
 
     if arg.command != None:
         flow.runSQLCmd(arg.command)
