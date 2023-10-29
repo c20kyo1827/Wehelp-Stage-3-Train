@@ -3,6 +3,8 @@ from flask_cors import CORS
 from models import mydb_mgr
 import boto3
 import uuid
+import logging
+import sys
 app=Flask(__name__)
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
@@ -14,6 +16,11 @@ mydb.init()
 
 s3 = boto3.resource("s3")
 bucket_name = "stage3bucket"
+
+logging.root.name = "Test API"
+logging.basicConfig(level=logging.INFO,
+                format="[%(levelname)-7s] %(name)s - %(message)s",
+                stream=sys.stdout)
 
 @app.route("/api/addMessage", endpoint="/api/addMessage")
 def add_message():
@@ -39,7 +46,9 @@ def add_message():
 				jsonify({ \
 					"ok": True
 				}), 200
-	except:
+	except Exception as e:
+		exc_type, _, exc_tb = sys.exc_info()
+		logging.error("Error : {error}, type : {type} at line : {line}".format(error=e, type=exc_type, line=exc_tb.tb_lineno))
 		return \
 			jsonify({ \
 				"error": True, \
@@ -59,7 +68,9 @@ def get_message():
 		return jsonify({ \
 				"data": result \
 			})
-	except:
+	except Exception as e:
+		exc_type, _, exc_tb = sys.exc_info()
+		logging.error("Error : {error}, type : {type} at line : {line}".format(error=e, type=exc_type, line=exc_tb.tb_lineno))
 		return \
 			jsonify({ \
 				"error": True, \
