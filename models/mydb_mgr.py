@@ -74,7 +74,7 @@ class mydb_mgr:
                 "CREATE TABLE message( \
                     id bigint AUTO_INCREMENT, \
                     content varchar(255) NOT NULL, \
-                    image_url varchar(255) NOT NULL, \
+                    uuid varchar(255) NOT NULL, \
                     PRIMARY KEY(id) \
                 )" \
             )
@@ -103,7 +103,7 @@ class mydb_mgr:
     def add_message(self, content, img_url):
         def add_attraction(cursor):
             sql = "INSERT INTO message  \
-                    (content, image_url) VALUES (%s, %s)"
+                    (content, uuid) VALUES (%s, %s)"
             val = (content, img_url)
             cursor.execute("USE mydb")
             cursor.execute(sql, val)
