@@ -25,24 +25,22 @@ logging.basicConfig(level=logging.INFO,
 @app.route("/api/addMessage", endpoint="/api/addMessage" ,methods=["POST"])
 def add_message():
 	try:
-		print(request)
-		print(request.data)
-		# ALLOWED_EXTENSIONS = {'png', 'jpg', 'bmp', 'tiff', 'tif', 'gif', 'jpeg'}
-		# def allowed_file(filename):
-		# 	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+		ALLOWED_EXTENSIONS = {'png', 'jpg', 'bmp', 'tiff', 'tif', 'gif', 'jpeg'}
+		def allowed_file(filename):
+			return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-		# if not allowed_file(request.args.get("image")):
-		# 	return \
-		# 		jsonify({ \
-		# 			"error": True, \
-		# 			"message": "Image format is not allowed" \
-		# 		}), 400
+		if not allowed_file(request.files["image"]):
+			return \
+				jsonify({ \
+					"error": True, \
+					"message": "Image format is not allowed" \
+				}), 400
 
-		# new_filename = uuid.uuid4().hex + '.' + \
-		# 	request.args.get("image").rsplit('.', 1)[1].lower()
-		# s3.Bucket(bucket_name).upload_fileobj(request.args.get("image"), new_filename)
+		new_filename = uuid.uuid4().hex + '.' + \
+			request.files["image"].rsplit('.', 1)[1].lower()
+		s3.Bucket(bucket_name).upload_fileobj(request.files["image"], new_filename)
 
-		# mydb.add_message(request.args.get("content"), request.args.get("image"))
+		mydb.add_message(request.args.get("content"), request.files["image"])
 		return \
 			jsonify({ \
 				"ok": True
