@@ -13,16 +13,18 @@ indexNamespace.initialization = function initialization(){
 indexNamespace.addElementListener = function addElementListener(){
     const btn = document.getElementById("id-button");
     btn.addEventListener("click", async () => {
-        const msg = document.getElementById("id-message").value;
-        const imgFile = document.getElementById("id-image").files[0];
-        if(msg == "" || imgFile == undefined){
+        const msg = document.getElementById("id-message");
+        const img = document.getElementById("id-image");
+        if(msg == "" || img == undefined){
             console.log("Empty");
             return;
         }
         let url = "/api/addMessage";
         const formData = new FormData();
-        formData.append("image", imgFile);
+        formData.append("image", img);
         formData.append("content", msg);
+        console.log(formData);
+        console.log(formData);
         let response = await fetch(url,
                 {
                     method: "POST",

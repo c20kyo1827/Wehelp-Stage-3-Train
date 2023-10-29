@@ -26,7 +26,7 @@ logging.basicConfig(level=logging.INFO,
 def add_message():
 	try:
 		print(request)
-		print(json.loads(request.get_data()))
+		print(request.data)
 		# ALLOWED_EXTENSIONS = {'png', 'jpg', 'bmp', 'tiff', 'tif', 'gif', 'jpeg'}
 		# def allowed_file(filename):
 		# 	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
