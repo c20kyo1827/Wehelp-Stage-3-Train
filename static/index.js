@@ -11,8 +11,9 @@ indexNamespace.initialization = function initialization(){
 }
 
 indexNamespace.addElementListener = function addElementListener(){
-    const btn = document.getElementById("id-button");
-    btn.addEventListener("click", async () => {
+    const form = document.getElementById("id-format");
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
         const msg = document.getElementById("id-message");
         const img = document.getElementById("id-image");
         if(msg == "" || img == undefined){
@@ -20,7 +21,7 @@ indexNamespace.addElementListener = function addElementListener(){
             return;
         }
         let url = "/api/addMessage";
-        const formData = new FormData(document.getElementById("id-form"));
+        const formData = new FormData(form);
         console.log(formData);
         let response = await fetch(url,
                 {
