@@ -11,8 +11,13 @@ indexNamespace.initialization = async function initialization(){
     let response = await fetch("api/getMessage");
     let json = await response.json();
     console.log(json);
+    const zipArrays = [];
+    const length = Math.min(json.data.message.length, json.data.image.length);
+    for (let i = 0; i < length; i++) {
+        zipArrays.push([json.data.message[i], json.data.image[i]]);
+    }
     const cloudFront = "https://d188mmb7xma67m.cloudfront.net/";
-    for(const[data, file] of zipArrays(json.data.message, json.data.image)){
+    for(const[data, file] of zipArrays){
         console.log(data);
         console.log(file);
         // const content = document.createElement("div");
