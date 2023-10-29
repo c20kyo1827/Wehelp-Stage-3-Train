@@ -15,7 +15,7 @@ indexNamespace.addElementListener = function addElementListener(){
     btn.addEventListener("click", async () => {
         const msg = document.getElementById("id-message").value;
         const imgFile = document.getElementById("id-image").files[0];
-        if(msg == "" || imgFile == ""){
+        if(msg == "" || imgFile == undefined){
             console.log("Empty");
             return;
         }
@@ -26,10 +26,7 @@ indexNamespace.addElementListener = function addElementListener(){
         let response = await fetch(url,
                 {
                     method: "POST",
-                    body: formData,
-                    headers: {
-                        "Content-Type": "application/json; charset=UTF-8"
-                    }
+                    body: formData
                 }
             );
         let json = await response.json();

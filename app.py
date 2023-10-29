@@ -25,8 +25,7 @@ logging.basicConfig(level=logging.INFO,
 @app.route("/api/addMessage", endpoint="/api/addMessage" ,methods=["POST"])
 def add_message():
 	try:
-		print(request.json.get("image"))
-		print(request.json.get("content"))
+		print(request)
 		# ALLOWED_EXTENSIONS = {'png', 'jpg', 'bmp', 'tiff', 'tif', 'gif', 'jpeg'}
 		# def allowed_file(filename):
 		# 	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
